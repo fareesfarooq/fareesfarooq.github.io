@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Farees Farooq</title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Inconsolata', incosolata;
+            format('truetype');
+        }
+
+        html, body {
+            margin: 0;
+            font-family: 'Inconsolata';
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom, #000000, #000000);
+        }
+
+        p {
+            color: #37ff00;
+        }
+
+        a:link {
+            color: #37ff00;
+        }
+
+        a:visited {
+            color: #37ff00;
+        }
+
+        a:hover {
+            color: #37ff00;
+        }
+
+        a:active {
+            color: #37ff00;
+        }
+
+        #main {
+            background-image: url(https://i.imgur.com/NakfHv4.jpeg);
+            background-size: cover;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #title {
+            color: #37ff00;
+            font-size: 4em;
+            margin: 0;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translate(0, -50%);
+            text-align: center;
+            animation: overlapcolor 2s ease-out;
+            z-index: 99;
+            opacity: 1;
+        }
+
+        @keyframes overlapcolor {
+            0% {
+                color: #37ff00;
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 0;
+            }
+
+            50% {
+                color: #37ff00;
+                opacity: 1;
+            }
+
+            100% {
+                color: #37ff00;
+            }
+        }
+
+        #title::after {
+            animation: cursoranim 1s infinite, hideAtStart 1s linear;
+            animation-timing-function: step-end;
+            content: "|";
+            margin-left: 5px;
+        }
+
+        @keyframes hideAtStart {
+            0% {
+                opacity: 0;
+            }
+
+            99.99% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes cursoranim {
+            0% {
+                color: transparent;
+            }
+
+            50% {
+                color: #37ff00;
+            }
+        }
+
+        #menu {
+            text-align: center;
+            width: 100%;
+            margin: 0 0 10px 0;
+            padding: 0;
+            position: absolute;
+            bottom: 0;
+        }
+
+        #menu li {
+            display: inline;
+            margin: 0px 25px 0px 25px;
+            font-size: 1.8em;
+            transition: all 0.1s;
+            text-decoration: underline;
+        }
+
+        #menu li:hover {
+            font-size: 2.6em;
+            cursor: pointer;
+        }
+
+        #transition-placeholder {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            height: 100%;
+            background-color: #37ff00;
+            animation: overlap 2s cubic-bezier(0, 0, 0.08, 1.02);
+        }
+
+        @keyframes overlap {
+            0% {
+                top: 0%;
+            }
+
+            50% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body onscroll="bodyScroll()">
+<div id="main">
+    <p id="title">Farees Farooq Ismail</p>
+    <ul id="menu">
+        <a style="color: #37ff00;" href="https://instagram.com/farees_farooq"><li>Instagram</li></a>
+        <a style="color: #37ff00;" href="https://drive.google.com/file/d/1HCFCxxfQ7Uj7iqPx64-51PBH-a6xigPP/view?usp=sharing"><li>Resume</li></a>
+        <a style="color: #37ff00;" href="https://linkedin.com/in/fareesfarooqismail"><li>LinkedIn</li></a>
+        <p style="color: #37ff00;"><i>Site under construction</i></p>
+        </p></ul>
+</div>
+
+<div id="transition-placeholder"></div>
+
+<script type="text/javascript">
+    var scrollTimer;
+
+    function bodyScroll() {
+        if (scrollTimer != -1)
+            clearTimeout(scrollTimer);
+
+        scrollTimer = window.setTimeout("scrollFinished()", 500);
+    }
+
+    function scrollFinished() {
+        window.location = toUrl;
+    }
+</script>
+
+
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap");
+    #ee5691e1e0c651c5311dd1fabd2b302b3 {
+        font-family: "Quicksand", sans-serif;
+        font-weight: 300;
+        color: #ffffff;
+        background-color: #254cf5;
+        padding: 10px 20px;
+        display: inline-block;
+        border-radius: 5px;
+        font-size: 11px;
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        z-index: 9999999999;
+        box-shadow: 0 10px 20px 0 hsla(229, 91%, 55%, 0.2);
+        text-align: center;
+        width: 200px;
+        max-width: 100%;
+    }
+
+    #ee5691e1e0c651c5311dd1fabd2b302b3 img {
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+
+    #ee5691e1e0c651c5311dd1fabd2b302b3 h2 {
+        margin-top: 0px;
+        margin-bottom: 10px;
+    }
+
+    #ee5691e1e0c651c5311dd1fabd2b302b3 p {
+        margin-top: 10px;
+        margin-bottom: 0px
