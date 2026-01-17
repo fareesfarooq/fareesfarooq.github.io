@@ -1,0 +1,802 @@
+```html
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Farees Farooq • Portfolio</title>
+    <style>
+        :root {
+            /* Dark + warm accent scheme (like your screenshot) */
+            --bg: #0b0c0f;
+            --panel: rgba(16, 18, 24, .75);
+            --card: rgba(18, 20, 28, .68);
+            --card2: rgba(12, 14, 18, .55);
+            --text: #e9ecf2;
+            --muted: #a7adbb;
+            --line: rgba(255, 255, 255, .08);
+            --shadow: 0 20px 50px rgba(0, 0, 0, .45);
+            --radius: 22px;
+
+            --accent: #f3b58f;
+            /* peach/orange */
+            --accent2: #ffcfad;
+            --accentGlow: rgba(243, 181, 143, .22);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+            color: var(--text);
+            background:
+                radial-gradient(900px 500px at 15% 10%, rgba(255, 255, 255, .06), transparent 60%),
+                radial-gradient(850px 450px at 85% 15%, rgba(243, 181, 143, .12), transparent 55%),
+                radial-gradient(850px 420px at 40% 110%, rgba(255, 255, 255, .05), transparent 60%),
+                var(--bg);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: 84px;
+            background: var(--panel);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 14px 10px;
+            z-index: 10;
+        }
+
+        .brand {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid var(--line);
+            font-weight: 800;
+            letter-spacing: .5px;
+            margin-bottom: 12px;
+        }
+
+        .nav {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-top: 10px;
+        }
+
+        .navbtn {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 8px;
+            border-radius: 18px;
+            border: 1px solid transparent;
+            color: var(--muted);
+            background: transparent;
+            cursor: pointer;
+            transition: .15s ease;
+            user-select: none;
+        }
+
+        .navbtn:hover {
+            background: rgba(255, 255, 255, .05);
+            color: var(--text);
+        }
+
+        .navbtn.active {
+            background: rgba(243, 181, 143, .12);
+            border-color: rgba(243, 181, 143, .20);
+            color: var(--text);
+            box-shadow: 0 10px 30px rgba(243, 181, 143, .08);
+        }
+
+        .icon {
+            width: 22px;
+            height: 22px;
+            display: block;
+            fill: currentColor;
+            opacity: .95;
+        }
+
+        .navlabel {
+            font-size: 11px;
+            line-height: 1;
+        }
+
+        .sideFooter {
+            margin-top: auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            padding-top: 10px;
+        }
+
+        .miniIcon {
+            width: 38px;
+            height: 38px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .04);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: .15s ease;
+        }
+
+        .miniIcon:hover {
+            transform: translateY(-1px);
+            border-color: rgba(243, 181, 143, .25);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .35);
+        }
+
+        .miniText {
+            font-size: 11px;
+            color: var(--muted);
+            text-align: center;
+            line-height: 1.2;
+            padding: 0 6px;
+        }
+
+        /* Main */
+        .main {
+            margin-left: 84px;
+            width: 100%;
+            padding: 28px 26px 60px;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* Top header */
+        .topbar {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 18px;
+            padding: 0 6px;
+        }
+
+        .crumb {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .title {
+            margin: 6px 0 0;
+            font-size: 24px;
+            letter-spacing: -.3px;
+        }
+
+        .pillRow {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .pill {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .04);
+            color: var(--text);
+            padding: 8px 10px;
+            border-radius: 999px;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .pill.accent {
+            border-color: rgba(243, 181, 143, .25);
+            background: rgba(243, 181, 143, .10);
+            box-shadow: 0 10px 30px rgba(243, 181, 143, .06);
+        }
+
+        /* Cards & grids */
+        .grid {
+            display: grid;
+            grid-template-columns: 1.2fr .9fr;
+            gap: 16px;
+        }
+
+        .card {
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .cardPad {
+            padding: 22px;
+        }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 250px;
+            background:
+                radial-gradient(900px 400px at 20% -10%, rgba(243, 181, 143, .16), transparent 60%),
+                radial-gradient(700px 400px at 100% 10%, rgba(255, 255, 255, .08), transparent 60%),
+                var(--card);
+        }
+
+        .bigName {
+            font-size: 64px;
+            margin: 0;
+            line-height: 0.95;
+            letter-spacing: -1.4px;
+        }
+
+        .sub {
+            margin: 0;
+            color: var(--muted);
+            font-size: 16px;
+            max-width: 52ch;
+            line-height: 1.5;
+        }
+
+        .ctaRow {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: none;
+            border-radius: 14px;
+            padding: 12px 14px;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: .2px;
+            transition: .15s ease;
+            user-select: none;
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #1a1310;
+            box-shadow: 0 18px 40px rgba(243, 181, 143, .18);
+        }
+
+        .btn.primary:hover {
+            transform: translateY(-1px);
+        }
+
+        .btn.ghost {
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--line);
+            color: var(--text);
+        }
+
+        .btn.ghost:hover {
+            border-color: rgba(243, 181, 143, .25);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .30);
+            transform: translateY(-1px);
+        }
+
+        /* Photo */
+        .photo {
+            position: relative;
+            min-height: 250px;
+            background:
+                radial-gradient(700px 350px at 30% 20%, rgba(255, 255, 255, .12), transparent 55%),
+                linear-gradient(135deg, rgba(243, 181, 143, .18), rgba(255, 255, 255, .06)),
+                url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=70");
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--radius);
+        }
+
+        .photo::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .52));
+        }
+
+        .photoTag {
+            position: absolute;
+            left: 16px;
+            bottom: 16px;
+            z-index: 1;
+            padding: 10px 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, .12);
+            background: rgba(10, 10, 12, .50);
+            backdrop-filter: blur(8px);
+            max-width: 85%;
+        }
+
+        .photoTag b {
+            display: block;
+        }
+
+        .photoTag span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* Lower cards */
+        .row3 {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr 1fr;
+            gap: 16px;
+        }
+
+        .kicker {
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 1.1px;
+            text-transform: uppercase;
+        }
+
+        .h3 {
+            margin: 10px 0 6px;
+            font-size: 20px;
+        }
+
+        .p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        .meter {
+            margin-top: 14px;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .06);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .meter>i {
+            display: block;
+            height: 100%;
+            width: 70%;
+            background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, .15));
+            box-shadow: 0 0 0 6px var(--accentGlow);
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .10);
+            background: rgba(255, 255, 255, .04);
+            color: var(--text);
+        }
+
+        /* Tabs */
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        /* Work grid */
+        .workGrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        .project {
+            background: var(--card2);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 160px;
+        }
+
+        .project b {
+            font-size: 15px;
+        }
+
+        .project a {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent2);
+            font-weight: 700;
+            padding-top: 6px;
+        }
+
+        .project a:hover {
+            text-decoration: underline;
+        }
+
+        .workHeader {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .linkBtn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .04);
+            color: var(--text);
+            font-weight: 800;
+            cursor: pointer;
+            transition: .15s ease;
+            white-space: nowrap;
+        }
+
+        .linkBtn:hover {
+            border-color: rgba(243, 181, 143, .25);
+            transform: translateY(-1px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, .30);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 18px;
+            color: var(--muted);
+            font-size: 13px;
+            padding: 0 6px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .row3 {
+                grid-template-columns: 1fr;
+            }
+
+            .workGrid {
+                grid-template-columns: 1fr;
+            }
+
+            .bigName {
+                font-size: 52px;
+            }
+
+            .pillRow {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand" title="Farees Farooq">F</div>
+
+            <div class="nav">
+                <button class="navbtn active" data-tab="home">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3l9-8z"></path>
+                    </svg>
+                    <span class="navlabel">Home</span>
+                </button>
+
+                <button class="navbtn" data-tab="work">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M10 2h4a2 2 0 012 2v2h4a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h4V4a2 2 0 012-2zm4 4V4h-4v2h4z">
+                        </path>
+                    </svg>
+                    <span class="navlabel">Work</span>
+                </button>
+            </div>
+
+            <div class="sideFooter">
+                <a class="miniIcon" href="https://github.com/fareesfarooq" target="_blank" rel="noreferrer"
+                    title="GitHub">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.77.6-3.35-1.19-3.35-1.19-.45-1.16-1.1-1.47-1.1-1.47-.9-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.64.35-1.09.63-1.34-2.21-.25-4.54-1.11-4.54-4.94 0-1.09.39-1.98 1.03-2.68-.1-.26-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0112 6.8c.85 0 1.71.12 2.51.35 1.9-1.29 2.74-1.02 2.74-1.02.56 1.38.21 2.39.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.33 4.69-4.55 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0012 2z">
+                        </path>
+                    </svg>
+                </a>
+
+                <a class="miniIcon" href="mailto:fareesfarooqismail@gmail.com" title="Email">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z">
+                        </path>
+                    </svg>
+                </a>
+
+                <div class="miniText">© <span id="year"></span></div>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main">
+            <div class="wrap">
+                <div class="topbar">
+                    <div>
+                        <div class="crumb" id="crumb">Overview</div>
+                        <h2 class="title" id="pageTitle">Portfolio</h2>
+                    </div>
+
+                    <div class="pillRow">
+                        <span class="pill accent">Werkstudent / Internship</span>
+                        <span class="pill">Aschaffenburg UAS</span>
+                        <span class="pill">Software Design • Year 2</span>
+                    </div>
+                </div>
+
+                <!-- HOME TAB -->
+                <section class="tab active" id="home">
+                    <div class="grid">
+                        <div class="card hero">
+                            <div class="cardPad">
+                                <h1 class="bigName">Farees<br />Farooq</h1>
+                                <p class="sub">
+                                    Software Design student at Aschaffenburg UAS (2nd year).
+                                    I build balanced projects across web development and core CS —
+                                    aiming for clean UI, solid logic, and maintainable code.
+                                </p>
+
+                                <div class="ctaRow">
+                                    <button class="btn primary" data-jump="work">View Work</button>
+
+                                    <!-- Requested: button opens email -->
+                                    <a class="btn ghost" href="mailto:fareesfarooqismail@gmail.com">
+                                        Let’s Talk
+                                    </a>
+
+                                    <a class="btn ghost" href="https://github.com/fareesfarooq" target="_blank"
+                                        rel="noreferrer">
+                                        GitHub
+                                    </a>
+                                </div>
+
+                                <div class="tags">
+                                    <span class="tag">Web</span>
+                                    <span class="tag">JavaScript</span>
+                                    <span class="tag">Systems / Theory</span>
+                                    <span class="tag">Team Projects</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card photo" role="img" aria-label="Warm gradient cover image">
+                            <div class="photoTag">
+                                <b>Currently focused on</b>
+                                <span>uni projects • interview prep • building a stronger portfolio</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row3" style="margin-top:16px;">
+                        <div class="card">
+                            <div class="cardPad">
+                                <div class="kicker">About</div>
+                                <h3 class="h3">Balanced builder</h3>
+                                <p class="p">
+                                    I’m studying Software Design and working towards a Werkstudent role
+                                    and internship. I like mixing practical UI work with solid CS fundamentals.
+                                </p>
+                                <div class="meter" aria-hidden="true"><i></i></div>
+                                <div class="tags">
+                                    <span class="tag">Clean UI</span>
+                                    <span class="tag">Problem-solving</span>
+                                    <span class="tag">Consistency</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="cardPad">
+                                <div class="kicker">Web</div>
+                                <h3 class="h3">Frontend + structure</h3>
+                                <p class="p">
+                                    Responsive layouts, reusable components, and keeping things tidy so
+                                    projects don’t turn into spaghetti.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="cardPad">
+                                <div class="kicker">CS</div>
+                                <h3 class="h3">Fundamentals</h3>
+                                <p class="p">
+                                    Automata / formal languages, OS concepts, DSA practice —
+                                    strengthening the base alongside building apps.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- WORK TAB -->
+                <section class="tab" id="work">
+                    <div class="card">
+                        <div class="cardPad">
+                            <div class="workHeader">
+                                <div>
+                                    <div class="kicker">Work</div>
+                                    <h3 class="h3">GitHub + selected areas</h3>
+                                    <p class="p">
+                                        I’m actively building — for now, this page groups my work into themes.
+                                        Each card links to my GitHub.
+                                    </p>
+                                </div>
+
+                                <a class="linkBtn" href="https://github.com/fareesfarooq" target="_blank"
+                                    rel="noreferrer">
+                                    Open GitHub →
+                                </a>
+                            </div>
+
+                            <div class="workGrid">
+                                <div class="project">
+                                    <b>Web Projects</b>
+                                    <div class="tags">
+                                        <span class="tag">HTML</span>
+                                        <span class="tag">CSS</span>
+                                        <span class="tag">JavaScript</span>
+                                    </div>
+                                    <p class="p">
+                                        UI experiments, small apps, and responsive layouts — focused on clean structure.
+                                    </p>
+                                    <a href="https://github.com/fareesfarooq" target="_blank" rel="noreferrer">View on
+                                        GitHub →</a>
+                                </div>
+
+                                <div class="project">
+                                    <b>CS Theory / Automata</b>
+                                    <div class="tags">
+                                        <span class="tag">DFA/NFA</span>
+                                        <span class="tag">CFG</span>
+                                        <span class="tag">TM</span>
+                                    </div>
+                                    <p class="p">
+                                        Coursework and practice around formal languages, parsing, and computation
+                                        models.
+                                    </p>
+                                    <a href="https://github.com/fareesfarooq" target="_blank" rel="noreferrer">View on
+                                        GitHub →</a>
+                                </div>
+
+                                <div class="project">
+                                    <b>DSA + Systems Practice</b>
+                                    <div class="tags">
+                                        <span class="tag">DSA</span>
+                                        <span class="tag">OS</span>
+                                        <span class="tag">Problem Solving</span>
+                                    </div>
+                                    <p class="p">
+                                        Implementations, exercises, and utility code to strengthen fundamentals for
+                                        interviews.
+                                    </p>
+                                    <a href="https://github.com/fareesfarooq" target="_blank" rel="noreferrer">View on
+                                        GitHub →</a>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+                                <span class="pill">Looking for: Werkstudent</span>
+                                <span class="pill">Also open to: Internship</span>
+                                <a class="pill" href="mailto:fareesfarooqismail@gmail.com"
+                                    style="border-color:rgba(243,181,143,.25);">
+                                    Email: fareesfarooqismail@gmail.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="footer">
+                    <span>© <span id="year2"></span> Farees Farooq</span>
+                    <span>Dark glass • minimal • HTML/CSS/JS</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const buttons = document.querySelectorAll(".navbtn");
+        const tabs = document.querySelectorAll(".tab");
+        const crumb = document.getElementById("crumb");
+        const pageTitle = document.getElementById("pageTitle");
+        const year = new Date().getFullYear();
+        document.getElementById("year").textContent = year;
+        document.getElementById("year2").textContent = year;
+
+        const labels = {
+            home: { crumb: "Overview", title: "Portfolio" },
+            work: { crumb: "Projects", title: "Work" }
+        };
+
+        function showTab(id) {
+            tabs.forEach(t => t.classList.toggle("active", t.id === id));
+            buttons.forEach(b => b.classList.toggle("active", b.dataset.tab === id));
+            crumb.textContent = labels[id].crumb;
+            pageTitle.textContent = labels[id].title;
+            history.replaceState(null, "", "#" + id);
+        }
+
+        buttons.forEach(btn => btn.addEventListener("click", () => showTab(btn.dataset.tab)));
+
+        // Hero button jumps to work tab
+        document.querySelectorAll("[data-jump]").forEach(el => {
+            el.addEventListener("click", () => showTab(el.dataset.jump));
+        });
+
+        // Load from hash
+        const start = (location.hash || "").replace("#", "").trim();
+        if (labels[start]) showTab(start);
+    </script>
+</body>
+
+</html>
+```
